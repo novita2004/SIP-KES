@@ -854,17 +854,6 @@
                             <div class="col-md-6">
                                 <div class="card p-3 h-100">
                                     <label class="form-label fw-bold">Rincian Obat</label>
-                                    <style>
-                                        /* Membuat backdrop modal transparan */
-                                        .modal-backdrop.show {
-                                        background-color: rgba(128, 128, 128, 0.5) !important;
-                                        }
-
-                                        /* Opsional: ubah modal agar tidak punya bayangan hitam */
-                                        .modal-content {
-                                        box-shadow: none;
-                                        }
-                                    </style>
                                     <div class="input-group mb-2">
                                         <input type="search" id="searchInput" class="form-control" placeholder="Cari">
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg">
@@ -1088,7 +1077,7 @@
                 <div class="modal-body">
                     <!-- Gambar Anatomi -->
                     <div class="text-center mb-4">
-                        <img src="path/to/anatomi.png" alt="Anatomi Tubuh" class="img-fluid" style="max-height: 300px;">
+                        <img src="{{ asset('images/image.png') }}" alt="Anatomi Tubuh" class="img-fluid" style="max-height: 300px;">
                     </div>
                     <!-- Textarea Keterangan -->
                     <div class="mb-3">
@@ -1103,7 +1092,77 @@
         </div>
     </div>
 
-
+    <!-- Modal Data Layanan -->
+<div class="modal fade" id="layananModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Data Layanan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table id="layananTable" class="display" style="width: 100%">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Nama Layanan</th>
+                <th>Tarif</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><button class="btn btn-primary btn-sm pilih-layanan">Pilih</button></td>
+                <td>Jasa Perawat</td>
+                <td>Rp 10.000,-</td>
+              </tr>
+              <tr>
+                <td><button class="btn btn-primary btn-sm pilih-layanan">Pilih</button></td>
+                <td>Jasa Pasang Infus</td>
+                <td>Rp 30.000,-</td>
+              </tr>
+              <tr>
+                <td><button class="btn btn-primary btn-sm pilih-layanan">Pilih</button></td>
+                <td>Bekam</td>
+                <td>Rp 50.000,-</td>
+              </tr>
+              <tr>
+                <td><button class="btn btn-primary btn-sm pilih-layanan">Pilih</button></td>
+                <td>Perawatan Luka Ringan</td>
+                <td>Rp 30.000,-</td>
+              </tr>
+              <tr>
+                <td><button class="btn btn-primary btn-sm pilih-layanan">Pilih</button></td>
+                <td>Perawatan Luka Infeksi</td>
+                <td>Rp 70.000,-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- jQuery dan DataTables -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#layananTable').DataTable();
+  
+      $('#openLayananModal').on('click', function () {
+        $('#layananModal').modal('show');
+      });
+  
+      $(document).on('click', '.pilih-layanan', function () {
+        const nama = $(this).closest('tr').find('td:eq(1)').text();
+        const tarif = $(this).closest('tr').find('td:eq(2)').text();
+        $('#layananInput').val(nama);
+        $('#layananModal').modal('hide');
+        // Tambahan logika jika ingin memasukkan ke tabel layanan juga
+      });
+    });
+  </script>
+    
     <!-- Modal Surat Keterangan Sehat-->
     <div class="modal fade" id="modalSehat" tabindex="-1" aria-labelledby="modalSehatLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
